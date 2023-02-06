@@ -15,6 +15,12 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import exception_handler
 
 # Create your views here.
+import stripe
+from environs import Env
+
+env = Env()
+env.read_env()
+STRIPE_SECRET_KEY = env.str('STRIPE_SECRET_KEY')
 
 
 class ShoeViewSet(viewsets.ModelViewSet):

@@ -5,13 +5,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        print(token)
-        print(user)
 
         # Add custom claims
         token['username'] = user.username
         token['email'] = user.email
-        token['is_staff'] = user.role.is_staff
+        if user.role is not None:
+            token['role'] = user.role.name
+            token['is_staff'] = user.role.is_staff
         # ...
 
         return token
